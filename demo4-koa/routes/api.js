@@ -3,7 +3,7 @@
  * Created by zh on 2019/10/25.
  */
 const KoaRouter = require('koa-router');
-const { apiController } = require('../controllers/index');
+const {apiController} = require('../controllers/index');
 
 const router = new KoaRouter();
 

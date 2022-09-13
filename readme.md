@@ -1,13 +1,12 @@
 ## Learn Node
 
-- demo1: hello
-- demo2: [原生上传图片](https://www.nodebeginner.org/index-zh-cn.html)
-- demo3: fs模块和fs-extra模块
-- demo4: Koa
+- demo1: 一个简单的HTTP服务器
+- demo2: fs模块和fs-extra模块
+- demo3: 算法图解以及各种算法
+- demo4: PDF生成
 - demo5: 算法图解
-- demo6: PDFKit
-- demo7: 训练营
-- demo8: 二叉树遍历
-- demo9: 图片压缩(tinyPNG)
-- demo10: 图片压缩(imageMin)
-- demo11: WebP
+- demo6: 生成命令行交互工具
+- demo7: 图片压缩
+- demo8: 循环引用的验证
+- demo9: Event Emitter
+- demo10: EML解析

@@ -8,16 +8,15 @@
 // 4 有提前结束机制
 // 可以使用 Promise 来做一个简单的实现
 
-
 const http = require('http');
 
-const compose = middleware => {
+const compose = (middleware) => {
   if (!Array.isArray(middleware)) {
-    throw new TypeError('Middleware stack must be an array')
+    throw new TypeError('Middleware stack must be an array');
   }
   for (const fn of middleware) {
     if (typeof fn !== 'function') {
-      throw new TypeError('Middleware must be composed of functions')
+      throw new TypeError('Middleware must be composed of functions');
     }
   }
   return function (context, next) {
@@ -40,14 +39,16 @@ const compose = middleware => {
         return Promise.resolve();
       }
       try {
-        return Promise.resolve(fn(context, function () {
-          return dispatch(i + 1);
-        }))
+        return Promise.resolve(
+          fn(context, function () {
+            return dispatch(i + 1);
+          })
+        );
       } catch (err) {
         return Promise.reject(err);
       }
     }
-  }
+  };
 };
 
 class MyKoa {
@@ -55,7 +56,7 @@ class MyKoa {
     this.middlewares = [];
     this.context = {
       data: []
-    }
+    };
   }
 
   use(middleware) {
@@ -73,8 +74,8 @@ class MyKoa {
 
     return (req, res) => {
       return fn(this.context)
-        .then(v => console.log('end'))
-        .catch(e => console.error('something wrong-- ', e));
+        .then((v) => console.log('end'))
+        .catch((e) => console.error('something wrong-- ', e));
     };
   }
 }
@@ -96,7 +97,7 @@ async function middleware3(ctx, next) {
   ctx.data.push(3);
   await next();
   console.log('action 004');
-  ctx.data.push(4)
+  ctx.data.push(4);
 }
 
 const app = new MyKoa();

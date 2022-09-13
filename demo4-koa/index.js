@@ -15,19 +15,18 @@ app.use(cors());
 // 加载路由
 app.use(routers.routes());
 
-
 // 时间打点
 app.use(async (ctx, next) => {
   const start = Date.now();
   await next();
-  const time = (Date.now() - start) + 'ms';
-  ctx.set('X-ResponseTime', time)
+  const time = Date.now() - start + 'ms';
+  ctx.set('X-ResponseTime', time);
 });
 
 // 控制台输出
 app.use(logger());
 
-app.use(ctx => {
+app.use((ctx) => {
   ctx.body = 'Hello Koa';
 });
 

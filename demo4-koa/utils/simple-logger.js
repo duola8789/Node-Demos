@@ -13,5 +13,5 @@ module.exports = function () {
     if (next) {
       await next();
     }
-  }
+  };
 };

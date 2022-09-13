@@ -5,7 +5,11 @@
   "main": "index.jds",
   "scripts": {
     "start": "node",
-    "server": "nodemon demo4-koa/index.js"
+    "server": "nodemon demo4-koa/index.js",
+    "demo8-commonjs": "node demo8-circular-reference/commonjs/index.js",
+    "demo12-es6": "node --experimental-modules demo8-circular-reference/es6/a.mjs",
+    "demo12-webpack": "webpack",
+    "prettier": "prettier --write 'demo**/**/*.{ts,js,scss,jsx,tsx}'"
   },
   "repository": {
     "type": "git",
@@ -19,19 +23,33 @@
   "homepage": "https://github.com/duola8789/node-learning#readme",
   "dependencies": {
     "@koa/cors": "^2.2.3",
+    "@types/mailparser": "^3.4.0",
+    "circular-dependency-plugin": "^5.2.2",
+    "date-fns": "^2.28.0",
+    "eml-format": "^0.6.1",
+    "eml-format-goon": "^0.5.5",
+    "eml-parser": "^1.0.9",
     "formidable": "^1.2.1",
     "fs-extra": "^7.0.1",
     "i": "^0.3.6",
+    "iconv": "^3.0.1",
+    "iconv-lite": "^0.6.3",
     "imagemin": "^7.0.1",
     "imagemin-jpegtran": "^7.0.0",
     "imagemin-pngquant": "^9.0.0",
     "imagemin-webp": "^6.0.0",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
+    "mailparser": "^3.5.0",
+    "node-tnef": "^1.4.0",
     "pako": "^1.0.10",
     "pdfkit": "^0.10.0",
     "pdfmake": "^0.1.57",
     "prettier": "^2.0.5",
-    "tinify": "^1.6.0-beta.2"
+    "tinify": "^1.6.0-beta.2",
+    "webpack": "^5.64.3"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.9.1"
   }
 }
