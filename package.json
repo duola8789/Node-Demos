@@ -5,9 +5,9 @@
   "main": "index.jds",
   "scripts": {
     "start": "node",
-    "server": "nodemon demo4-koa/index.js",
-    "demo8-commonjs": "node demo8-circular-reference/commonjs/index.js",
-    "demo12-es6": "node --experimental-modules demo8-circular-reference/es6/a.mjs",
+    "server": "nodemon demo04-koa/index.js",
+    "demo8-commonjs": "node demo08-circular-reference/commonjs/index.js",
+    "demo12-es6": "node --experimental-modules demo08-circular-reference/es6/a.mjs",
     "demo12-webpack": "webpack",
     "prettier": "prettier --write 'demo**/**/*.{ts,js,scss,jsx,tsx}'"
   },

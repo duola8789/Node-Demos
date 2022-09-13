@@ -14,11 +14,11 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-/demo1-simple-server/temp
+/demo01-simple-server/temp
 *.pdf
 
-/demo7-compress-image/source
-/demo7-compress-image/dist
+/demo07-compress-image/source
+/demo07-compress-image/dist
 /demo10-image-min/source
 /demo10-image-min/dist
 /demo11-web/dist
