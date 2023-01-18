@@ -21,9 +21,10 @@ function parseEml(filePath) {
 }
 
 function handleDatAttachments(parsedMail, encoding) {
+  console.log(parsedMail, 123123);
   const datAttach = parsedMail.attachments.find((v) => v.contentType === 'application/ms-tnef' && v.filename && v.filename.endsWith('dat'));
-  if (datAttach) {
-    return new Promise((resolve) => {
+  return new Promise((resolve) => {
+    if (datAttach) {
       tnef.parseBuffer(datAttach.content, (err, content) => {
         if (err) {
           resolve('');
@@ -33,8 +34,9 @@ function handleDatAttachments(parsedMail, encoding) {
           resolve(res);
         }
       });
-    });
-  }
+    }
+    return resolve('');
+  });
 }
 
 function writeFile(fileName, data) {
@@ -45,7 +47,7 @@ function writeFile(fileName, data) {
 }
 
 console.time('parse time');
-parseEml(path.join(__dirname, 'cases', 'test3.eml'))
+parseEml(path.join(__dirname, 'cases', 'test4.eml'))
   .then(({encoding, parsedMail}) => {
     console.timeEnd('parse time');
     return writeFile('parsed.js', JSON.stringify(parsedMail)).then(() => {
