@@ -10,3 +10,4 @@
 - demo8: 循环引用的验证
 - demo9: Event Emitter
 - demo10: EML解析
+- demo11: 编码并生成EML
