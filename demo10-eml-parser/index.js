@@ -7,6 +7,11 @@ const simpleParser = require('mailparser').simpleParser;
 const tnef = require('node-tnef');
 const iconvLite = require('iconv-lite');
 
+const fileName = process.argv[2];
+if (!fileName) {
+  throw new Error('输入要解析的文件名')
+}
+
 function parseEml(filePath) {
   return fse.stat(filePath).then(() => {
     return fse.readFile(filePath).then((file) => {
@@ -21,17 +26,18 @@ function parseEml(filePath) {
 }
 
 function handleDatAttachments(parsedMail, encoding) {
-  console.log(parsedMail, 123123);
   const datAttach = parsedMail.attachments.find((v) => v.contentType === 'application/ms-tnef' && v.filename && v.filename.endsWith('dat'));
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     if (datAttach) {
       tnef.parseBuffer(datAttach.content, (err, content) => {
         if (err) {
           resolve('');
-        } else {
+        } else if (content.BodyHTML) {
           const buffer = iconvLite.decode(Buffer.from(content.BodyHTML), encoding);
           const res = buffer.toString();
           resolve(res);
+        } else {
+          reject(new Error('handleDatAttachments error'))
         }
       });
     }
@@ -40,16 +46,14 @@ function handleDatAttachments(parsedMail, encoding) {
 }
 
 function writeFile(fileName, data) {
-  const filePath = path.join(__dirname, 'cases', fileName);
+  const filePath = path.join(__dirname, 'output', fileName);
   return fse.writeFile(filePath, data, 'utf8').then(() => {
-    console.log('写入完成', fileName);
+    console.log('写入完成', filePath);
   });
 }
 
-console.time('parse time');
-parseEml(path.join(__dirname, 'cases', 'test4.eml'))
+parseEml(path.join(__dirname, 'cases', `${fileName}.eml`))
   .then(({encoding, parsedMail}) => {
-    console.timeEnd('parse time');
     return writeFile('parsed.js', JSON.stringify(parsedMail)).then(() => {
       return handleDatAttachments(parsedMail, encoding).then((html) => {
         if (html) {
@@ -59,4 +63,4 @@ parseEml(path.join(__dirname, 'cases', 'test4.eml'))
       });
     });
   })
-  .then((parsedMail) => writeFile('parsed.html', parsedMail.html));
+  .then((parsedMail) => writeFile('parsed.html', parsedMail.html))
